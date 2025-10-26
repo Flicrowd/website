@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight, RotateCw, Home, Star, Clock, Settings, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -17,6 +17,13 @@ const NavigationBar = ({
   setShowDownloads
 }) => {
   const [urlInput, setUrlInput] = useState(activeTab?.url || "");
+
+  // Sync URL input with active tab
+  useEffect(() => {
+    if (activeTab?.url) {
+      setUrlInput(activeTab.url);
+    }
+  }, [activeTab?.url]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
